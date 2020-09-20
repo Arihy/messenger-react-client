@@ -5,12 +5,14 @@ import { Tabs } from 'react-bulma-components';
 import './Auth.scss';
 import Signup from './signup/Signup';
 import Signin from './signin/Signin';
+import { API } from 'config/config';
 
 class Auth extends React.Component {
   constructor() {
     super();
     this.state = {
       activeTab: 'signup',
+      accessToken: '',
     };
 
     this.handleTab = this.handleTabs.bind(this);
@@ -24,8 +26,21 @@ class Auth extends React.Component {
    * @param { string } obj.password - password
    *
    */
-  handleSingup({ username, email, password }) {
-    console.log(`${username} - ${email} - ${password}`);
+  async handleSingup({ username, email, password }) {
+    try {
+      const response = await API.post('/auth/signup', {
+        username: username,
+        email: email,
+        password: password,
+      });
+      if (response.data && response.data.id) {
+        this.setState({
+          activeTab: 'signin',
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   /**
@@ -35,8 +50,18 @@ class Auth extends React.Component {
    * @param { string } obj.password - password
    *
    */
-  handleSingin({ identification, password }) {
-    console.log(`${identification} - ${password}`);
+  async handleSingin({ identification, password }) {
+    try {
+      const response = await API.post('/auth/login', {
+        username: identification,
+        password: password,
+      });
+      this.setState({
+        accessToken: response.data.accessToken,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   /**
