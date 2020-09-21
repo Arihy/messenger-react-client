@@ -3,7 +3,7 @@ import { Navbar } from 'react-bulma-components';
 
 import './Header.scss';
 
-function Header() {
+const Header = () => {
   return (
     <Navbar className='header'>
       <Navbar.Brand>
@@ -13,6 +13,6 @@ function Header() {
       </Navbar.Brand>
     </Navbar>
   );
-}
+};
 
 export default Header;
