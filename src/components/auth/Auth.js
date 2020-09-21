@@ -8,8 +8,8 @@ import Signin from './signin/Signin';
 import { API } from 'config/config';
 
 class Auth extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       activeTab: 'signup',
       accessToken: '',
@@ -34,11 +34,23 @@ class Auth extends React.Component {
         password: password,
       });
       if (response.data && response.data.id) {
+        const notificationContent =
+          'Votre compte a bien été créé, vous pouvez vous connecter.';
         this.setState({
           activeTab: 'signin',
         });
+        this.props.onNotification({
+          content: notificationContent,
+          status: 'success',
+        });
       }
     } catch (err) {
+      const notificationContent =
+        "Votre compte n'a pas pu être créé, veuillez recommencer.";
+      this.props.onNotification({
+        content: notificationContent,
+        status: 'danger',
+      });
       console.error(err);
     }
   }
