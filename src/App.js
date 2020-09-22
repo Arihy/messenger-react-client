@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 import './App.scss';
 
@@ -75,8 +81,19 @@ class App extends React.Component {
       <div className='app'>
         <Header />
         <Container className='app-container'>
-          {this.notification()}
-          <Auth onNotification={(event) => this.handleNotification(event)} />
+          <Router>
+            {this.notification()}
+            <Switch>
+              <Route exact path='/'>
+                <Redirect to='/auth'></Redirect>
+              </Route>
+              <Route exact path='/auth'>
+                <Auth
+                  onNotification={(event) => this.handleNotification(event)}
+                ></Auth>
+              </Route>
+            </Switch>
+          </Router>
         </Container>
       </div>
     );
