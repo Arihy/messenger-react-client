@@ -27,16 +27,16 @@ class Signup extends React.Component {
   /**
    * Méthode permettant de gérer les inputs du formulaire
    */
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
   /**
    * Méthode permettant de faire remontrer les informations pour l'inscription
    */
-  handleSubmit() {
+  handleSubmit = () => {
     if (
       this.state.username.length > 0 &&
       this.state.email.length > 0 &&
@@ -44,9 +44,9 @@ class Signup extends React.Component {
     ) {
       this.props.onSubmit(this.state);
     }
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div className='signup'>
         <Field>
@@ -91,7 +91,7 @@ class Signup extends React.Component {
         <Button onClick={this.handleSubmit}>Signup</Button>
       </div>
     );
-  }
+  };
 }
 
 export default Signup;

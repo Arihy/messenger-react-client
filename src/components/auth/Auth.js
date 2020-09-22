@@ -26,7 +26,7 @@ class Auth extends React.Component {
    * @param { string } obj.password - password
    *
    */
-  async handleSingup({ username, email, password }) {
+  handleSingup = async ({ username, email, password }) => {
     try {
       const response = await API.post('/auth/signup', {
         username: username,
@@ -50,7 +50,7 @@ class Auth extends React.Component {
         status: 'danger',
       });
     }
-  }
+  };
 
   /**
    * Méthode permettant de gérer la connexion
@@ -59,7 +59,7 @@ class Auth extends React.Component {
    * @param { string } obj.password - password
    *
    */
-  async handleSingin({ identification, password }) {
+  handleSingin = async ({ identification, password }) => {
     try {
       const response = await API.post('/auth/login', {
         username: identification,
@@ -74,19 +74,19 @@ class Auth extends React.Component {
         status: 'danger',
       });
     }
-  }
+  };
 
   /**
    * Méthode permettant de gérer les tabs
    * @param { string } tab - tab à activer
    */
-  handleTabs(tab) {
+  handleTabs = (tab) => {
     this.setState({
       activeTab: tab,
     });
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div className='auth'>
         <Tabs>
@@ -112,7 +112,7 @@ class Auth extends React.Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default Auth;

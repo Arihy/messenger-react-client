@@ -26,25 +26,25 @@ class Signin extends React.Component {
   /**
    * Méthode permettant de gérer les inputs du formulaire
    */
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
   /**
    * Méthode permettant de faire remontrer les informations pour la connexion
    */
-  handleSubmit() {
+  handleSubmit = () => {
     if (
       this.state.identification.length > 0 &&
       this.state.password.length > 0
     ) {
       this.props.onSubmit(this.state);
     }
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div className='signin'>
         <Field>
@@ -76,7 +76,7 @@ class Signin extends React.Component {
         <Button onClick={this.handleSubmit}>Signin</Button>
       </div>
     );
-  }
+  };
 }
 
 export default Signin;
