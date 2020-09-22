@@ -45,13 +45,10 @@ class Auth extends React.Component {
         });
       }
     } catch (err) {
-      const notificationContent =
-        "Votre compte n'a pas pu être créé, veuillez recommencer.";
       this.props.onNotification({
-        content: notificationContent,
+        content: err?.response?.data?.message || 'Erreur inconnue',
         status: 'danger',
       });
-      console.error(err);
     }
   }
 
@@ -72,7 +69,10 @@ class Auth extends React.Component {
         accessToken: response.data.accessToken,
       });
     } catch (err) {
-      console.error(err);
+      this.props.onNotification({
+        content: err?.response?.data?.message || 'Erreur inconnue',
+        status: 'danger',
+      });
     }
   }
 
