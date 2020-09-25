@@ -15,6 +15,7 @@ import { Container } from 'react-bulma-components';
 import Auth from 'components/auth/Auth';
 import Header from 'components/header/Header';
 import Notification from 'components/notification/Notification';
+import Messenger from 'components/messenger/Messenger';
 
 class App extends React.Component {
   constructor() {
@@ -91,6 +92,9 @@ class App extends React.Component {
                 <Auth
                   onNotification={(event) => this.handleNotification(event)}
                 ></Auth>
+              </Route>
+              <Route exact path='/messenger'>
+                <Messenger></Messenger>
               </Route>
             </Switch>
           </Router>
