@@ -1,11 +1,12 @@
 import React from 'react';
+import AllConversations from './all-conversations/AllConversations';
 
 import './Messenger.scss';
 
 const Messenger = () => {
   return (
     <div className='messenger'>
-      <h1>Messenger</h1>
+      <AllConversations></AllConversations>
     </div>
   );
 };
