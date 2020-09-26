@@ -12,7 +12,7 @@ class Auth extends React.Component {
     super(props);
     this.state = {
       activeTab: 'signup',
-      accessToken: '',
+      connectedUser: null,
     };
 
     this.handleTab = this.handleTabs.bind(this);
@@ -66,8 +66,10 @@ class Auth extends React.Component {
         password: password,
       });
       this.setState({
-        accessToken: response.data.accessToken,
+        connectedUser: response.data,
       });
+      this.props.onSignin(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
     } catch (err) {
       this.props.onNotification({
         content: err?.response?.data?.message || 'Erreur inconnue',

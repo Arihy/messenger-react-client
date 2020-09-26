@@ -27,10 +27,12 @@ class App extends React.Component {
         content: '',
         status: '',
       },
+      connectedUser: JSON.parse(localStorage.getItem('user')),
     };
 
     this.hideNotification = this.hideNotification.bind(this);
     this.handleNotification = this.handleNotification.bind(this);
+    this.handleUser = this.handleUser.bind(this);
   }
 
   /**
@@ -63,6 +65,16 @@ class App extends React.Component {
   };
 
   /**
+   * Permet de stocker l'utilisateur connecté
+   * @param { Object } user
+   */
+  handleUser = (user) => {
+    this.setState({
+      connectedUser: user,
+    });
+  };
+
+  /**
    * Permet d'afficher la notification si besoin
    */
   notification = () => {
@@ -89,12 +101,21 @@ class App extends React.Component {
                 <Redirect to='/auth'></Redirect>
               </Route>
               <Route exact path='/auth'>
-                <Auth
-                  onNotification={(event) => this.handleNotification(event)}
-                ></Auth>
+                {this.state.connectedUser ? (
+                  <Redirect to='/messenger'></Redirect>
+                ) : (
+                  <Auth
+                    onNotification={(event) => this.handleNotification(event)}
+                    onSignin={(event) => this.handleUser(event)}
+                  ></Auth>
+                )}
               </Route>
               <Route exact path='/messenger'>
-                <Messenger></Messenger>
+                {this.state.connectedUser ? (
+                  <Messenger></Messenger>
+                ) : (
+                  <Redirect to='/auth'></Redirect>
+                )}
               </Route>
             </Switch>
           </Router>
